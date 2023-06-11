@@ -1,1 +1,1 @@
-* * * * * python3 /source.py >> /test/test.txt 2>&1
+* * * * * sudo docker run --env USER_ID='asdf' --env USER_PW='1234' --env NUM=1 -d lotto

@@ -2,15 +2,12 @@ from playwright.sync_api import Playwright, sync_playwright
 import time, os
 
 # 동행복권 아이디와 패스워드를 설정
-USER_ID = os.environ.get('USER_ID') # 수정1
-USER_PW = os.environ.get('USER_PW') #수정2
-
-print(USER_ID)
-print(USER_PW)
-exit()
+USER_ID = os.environ['USER_ID'] # 수정1
+USER_PW = os.environ['USER_PW'] #수정2
+NUM = os.environ["NUM"]
 
 # 구매 개수를 설정
-COUNT = 1
+COUNT = int(NUM)
 
 def run(playwright: Playwright) -> None:
 
