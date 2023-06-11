@@ -4,10 +4,9 @@ import time, os
 # 동행복권 아이디와 패스워드를 설정
 USER_ID = os.environ['USER_ID'] # 수정1
 USER_PW = os.environ['USER_PW'] #수정2
-NUM = os.environ["NUM"]
 
 # 구매 개수를 설정
-COUNT = int(NUM)
+COUNT = os.environ['NUM']
 
 def run(playwright: Playwright) -> None:
 

@@ -12,4 +12,5 @@ RUN unzip ./chromedriver_linux64.zip
 COPY ./source.py source.py
 COPY ./requirements.txt requirements.txt
 RUN pip install -r requirements.txt
+RUN playwright install
 ENTRYPOINT ["python3", "/source.py"]
