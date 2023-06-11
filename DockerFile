@@ -9,5 +9,5 @@ RUN echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://
 RUN apt-get update && apt-get install -y google-chrome-stable
 RUN unzip ./chromedriver_linux64.zip
 RUN git clone https://github.com/1010asdf0101/dhlottery
-RUN pip install -r --yes /dhlottery/requirements.txt
+RUN pip install -r /dhlottery/requirements.txt
 CMD ["cron", "-f", "*/30 * * * * python3 /dhlottery/source.py"]
