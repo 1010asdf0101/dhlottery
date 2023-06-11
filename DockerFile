@@ -8,6 +8,7 @@ RUN gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --imp
 RUN echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
 RUN apt-get update && apt-get install -y google-chrome-stable
 RUN unzip ./chromedriver_linux64.zip
+RUN mkdir /test
 #python setting
 COPY ./source.py source.py
 COPY ./requirements.txt requirements.txt
@@ -16,5 +17,4 @@ RUN pip install -r requirements.txt
 COPY ./cron /etc/cron.d/cron
 RUN chmod 0755 /etc/cron.d/cron
 #run cron
-RUN crontab /etc/cron.d/cron
-CMD ["cron", "-f"]
+CMD ["cron", "-f", "/etc/cron.d/cron"]
