@@ -1,4 +1,4 @@
-#from playwright.sync_api import Playwright, sync_playwright
+from playwright.sync_api import Playwright, sync_playwright
 import time, os
 
 # 동행복권 아이디와 패스워드를 설정
