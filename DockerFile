@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y git fonts-unfonts-core fonts-unfonts-extra wget unzip python3-pip
+RUN apt-get update && apt-get install -y fonts-unfonts-core fonts-unfonts-extra wget unzip python3-pip cron
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add
 RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub
 RUN wget https://chromedriver.storage.googleapis.com/100.0.4896.20/chromedriver_linux64.zip
@@ -8,6 +8,13 @@ RUN gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --imp
 RUN echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
 RUN apt-get update && apt-get install -y google-chrome-stable
 RUN unzip ./chromedriver_linux64.zip
-RUN git clone https://github.com/1010asdf0101/dhlottery
-RUN pip install -r /dhlottery/requirements.txt
-CMD ["cron", "-f", "*/30 * * * * python3 /dhlottery/source.py"]
+#python setting
+COPY ./source.py source.py
+COPY ./requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+#cron setting
+COPY ./cron /etc/cron.d/cron
+RUN chmod 0755 /etc/cron.d/cron
+#run cron
+RUN crontab /etc/cron.d/cron
+CMD ["cron", "-f"]
